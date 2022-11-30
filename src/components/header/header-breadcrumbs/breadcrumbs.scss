@@ -1,0 +1,21 @@
+.header-breadcrumbs {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    div span {
+        margin: 0px 7px;
+    }
+}
+
+.breadcrumbs-item {
+    text-decoration: none;
+    font-family: "Gilroy";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 22px;
+
+    color: #4a4c76;
+    &.active {
+        color: #1f2040;
+    }
+}

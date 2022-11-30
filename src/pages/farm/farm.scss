@@ -1,0 +1,321 @@
+.farm-header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    .farm-header-details {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        margin-bottom: 23px;
+    }
+}
+.farm-page {
+    height: 100vh;
+}
+.farm-title {
+    display: flex;
+    flex-direction: row;
+}
+.farm-title-text {
+    font-family: "Gilroy";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    color: #1f2040;
+    margin-right: 12px;
+}
+
+.farm-title-icons {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    span {
+        color: #e8ecfd;
+        margin: 0px 5px;
+    }
+}
+
+.farm-header-data,
+.farm-header-control {
+    font-family: "Gilroy";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+
+    color: #5555ff;
+
+    &.tvl {
+        margin: 0px 28px;
+    }
+    &.tvl,
+    &.farm-header-control {
+        color: #1f2040;
+    }
+}
+
+.farm-header-control {
+    background: #ffffff;
+    border: 1px solid #e8ecfd;
+    border-radius: 7px;
+    padding: 5px 20px;
+}
+
+.title-icon {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    .title-icon-text {
+        font-family: "Gilroy";
+        font-style: normal;
+        font-weight: 500;
+        font-size: 14px;
+
+        color: #1f2040;
+    }
+    .title-icon-image {
+        display: flex;
+        margin-right: 5px;
+    }
+}
+
+.farm-card {
+    background: #ffffff;
+    box-shadow: 0px 0px 38px 5px rgba(0, 0, 0, 0.05);
+    border-radius: 5px;
+    width: 43%;
+    padding: 20px 30px;
+}
+
+.farm-cards {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.card-item {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-bottom: 5px;
+    border-bottom: 1px solid #e8ecfd;
+    margin-bottom: 5px;
+
+    .card-title {
+        font-family: "Gilroy";
+        font-style: normal;
+        font-weight: 500;
+        font-size: 18px;
+
+        color: #1f2040;
+    }
+
+    .card-info {
+        font-family: "Gilroy";
+        font-style: normal;
+        font-weight: 500;
+        font-size: 18px;
+
+        color: #63637a;
+    }
+
+    &.total {
+        border-bottom: none;
+        margin-top: 4px;
+        .card-title {
+            font-family: "Gilroy";
+            font-style: normal;
+            font-weight: 700;
+            font-size: 18px;
+
+            color: #1f2040;
+        }
+        .card-info {
+            font-family: "Gilroy";
+            font-style: normal;
+            font-weight: 700;
+            font-size: 18px;
+
+            color: #7173fc;
+        }
+    }
+}
+.assets {
+    .assets-items {
+        display: flex;
+        flex-direction: column;
+    }
+    .assets-info {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        margin-bottom: 5px;
+    }
+    .assets-icon {
+        display: flex;
+        margin-right: 5px;
+    }
+    .assets-text {
+        font-family: "Gilroy";
+        font-style: normal;
+        font-weight: 500;
+        font-size: 18px;
+        margin-right: 5px;
+        color: #1f2040;
+    }
+    .assets-details {
+        font-family: "Gilroy";
+        font-style: normal;
+        font-weight: 500;
+        font-size: 13px;
+        color: #63637a;
+    }
+}
+
+// ================== Form
+.farm-form {
+    margin-bottom: 60px;
+}
+
+.form-items {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    .form-item {
+        width: 48%;
+    }
+}
+
+.form-item-label {
+    font-family: "Gilroy";
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+
+    color: #1f2040;
+    margin-bottom: 5px;
+    span {
+        font-style: normal;
+        font-weight: 400;
+        font-size: 14px;
+
+        text-decoration-line: underline;
+
+        color: #1f2040;
+    }
+}
+
+.form-item-input {
+    display: flex;
+    position: relative;
+    margin-bottom: 12px;
+
+    .item-input-icon {
+        position: absolute;
+        left: 10px;
+        top: 8px;
+    }
+
+    .item-input-text {
+        position: absolute;
+        right: 12px;
+        top: 10px;
+
+        font-family: "Gilroy";
+        font-style: normal;
+        font-weight: 500;
+        font-size: 20px;
+
+        color: #1f2040;
+    }
+
+    .item-input {
+        width: 100%;
+        background: #ffffff;
+        border: 1px solid #e8ecfd;
+        border-radius: 7px;
+        font-family: "Gilroy";
+        font-style: normal;
+        font-weight: 500;
+        font-size: 20px;
+        color: #e7ebfc;
+        padding: 11px 0px;
+        padding-left: 50px;
+
+        &:focus {
+            color: #1f2040;
+        }
+
+        &.error {
+            border-color: #ff947c;
+        }
+    }
+}
+
+.form-item-controls {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 20px;
+    .item-control {
+        margin-right: 10px;
+        &:last-child {
+            margin-right: 0px;
+        }
+        padding: 6px 12px;
+        font-family: "Gilroy";
+        font-style: normal;
+        font-weight: 500;
+        font-size: 16px;
+        background: #ffffff;
+        border: 1px solid #e8ecfd;
+        border-radius: 7px;
+        color: #1f2040;
+
+        &:hover {
+            border-color: #7173fc;
+
+            background-color: #7173fc;
+            color: #fff;
+            cursor: pointer;
+        }
+    }
+}
+
+.farm-form-submit {
+    button {
+        background: #7173fc;
+        border-radius: 7px;
+        border: 1px solid #7173fc;
+
+        font-family: "Gilroy";
+        font-style: normal;
+        font-weight: 700;
+        font-size: 24px;
+        line-height: 30px;
+        text-align: center;
+
+        color: #ffffff;
+        width: 100%;
+        padding: 8px 0px 10px 0px;
+        transition: 0.2s ease-in-out;
+        cursor: pointer;
+        &:hover {
+            background-color: #fff;
+            color: #7173fc;
+        }
+    }
+}
+
+.farm-form-submit button:disabled {
+    opacity: 0.3 !important;
+    &:hover {
+        background-color: #7173fc;
+        color: white;
+        cursor: unset;
+    }
+}
+
+.touched {
+    color: #1f2040 !important;
+}

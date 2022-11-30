@@ -1,0 +1,27 @@
+.header-profile {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 6px 20px;
+    border-radius: 6px;
+    border: 1px solid #1f2040;
+    transition: 0.2s ease-in-out;
+    cursor: pointer;
+    margin-right: 26px;
+    &:hover {
+        background-color: #e8ecfd;
+    }
+    .profile-name {
+        margin-right: 2px;
+    }
+    .profile-icon {
+        display: flex;
+    }
+
+    &.logout {
+        border-color: #7173fc;
+    }
+}
+.profile-text.logout {
+    color: #7173fc;
+}

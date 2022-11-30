@@ -1,0 +1,16 @@
+.item-input input::-webkit-outer-spin-button,
+.item-input input::-webkit-inner-spin-button {
+    /* display: none; <- Crashes Chrome on hover */
+    -webkit-appearance: none;
+    display: none;
+    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+}
+
+.item-input input[type="number"] {
+    -moz-appearance: textfield; /* Firefox */
+}
+.form-item-input .item-input {
+    // &.touched {
+    //     color: red !important;
+    // }
+}

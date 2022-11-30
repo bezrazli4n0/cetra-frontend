@@ -1,0 +1,49 @@
+.contacts {
+    background-color: #7173fc;
+    // border-radius: 5px 5px 0px 0px;
+    border-radius: 5px;
+    padding: 30px 30px 10px 30px;
+    // width: 100%;
+    position: absolute;
+}
+
+.contacts-icons {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    .contacts-icon {
+        display: flex;
+    }
+}
+
+.contacts-title {
+    font-family: "Gilroy";
+    font-style: normal;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 30px;
+
+    color: #ffffff;
+    margin-bottom: 20px;
+    margin-top: 30px;
+}
+
+.contacts-subtitle {
+    font-family: "Gilroy";
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+    /* identical to box height */
+
+    color: #ffffff;
+}
+
+.contacts {
+    display: flex;
+    flex-direction: column;
+    a {
+        text-decoration: none;
+    }
+}

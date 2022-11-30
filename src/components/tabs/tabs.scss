@@ -1,0 +1,23 @@
+.card-item.plus.card-info {
+    font-family: "Gilroy";
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    text-align: right;
+
+    color: #1f2040 !important;
+}
+
+.plus-info {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    span {
+        margin: 0px 7px;
+    }
+}
+
+.plus-info-icon {
+    display: flex;
+    margin-right: 3px;
+}

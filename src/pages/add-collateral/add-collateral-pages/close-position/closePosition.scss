@@ -1,0 +1,276 @@
+.close-position-radios {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 25px;
+    .position-radio {
+        display: flex;
+        flex-direction: column;
+        background: #ffffff;
+        box-shadow: 0px 0px 38px 5px rgba(0, 0, 0, 0.05);
+        border-radius: 5px;
+        padding: 20px 20px 20px 20px;
+        width: 45%;
+        border: 1px solid transparent;
+    }
+
+    label.position-radio:hover {
+        cursor: pointer;
+        border-color: #7173fc !important;
+    }
+
+    .radio-title {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        margin-bottom: 20px;
+        .radio-container {
+            display: flex;
+        }
+        .radio-text {
+            font-family: "Gilroy";
+            font-style: normal;
+            font-weight: 600;
+            font-size: 20px;
+            margin-left: 6px;
+            color: #1f2040;
+        }
+    }
+    .radio-subtitle {
+        font-family: "Gilroy";
+        font-style: normal;
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 17px;
+
+        color: #1f2040;
+    }
+}
+
+/* The container */
+.radio-container {
+    display: block;
+    position: relative;
+    padding-left: 20px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 22px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    height: 100%;
+    margin-bottom: 0px;
+}
+
+/* Hide the browser's default radio button */
+.radio-container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}
+
+/* Create a custom radio button */
+.checkmark {
+    position: absolute;
+    top: 3px;
+    left: 0;
+    height: 15px;
+    width: 15px;
+    background-color: #fff;
+    border: 1px solid #1f2040;
+    border-radius: 50%;
+}
+
+/* Create the indicator (the dot/circle - hidden when not checked) */
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+/* Show the indicator (dot/circle) when checked */
+.radio-container input:checked ~ .checkmark:after {
+    display: block;
+}
+
+/* Style the indicator (dot/circle) */
+.radio-container .checkmark:after {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+
+    text-align: center;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #1f2040;
+}
+
+.close-position-item {
+    background: #ffffff;
+    box-shadow: 0px 0px 38px 5px rgba(0, 0, 0, 0.05);
+    border-radius: 5px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid transparent;
+    &:hover {
+        border-color: #7173fc;
+        cursor: pointer;
+    }
+}
+
+.close-position-submit {
+    display: flex;
+
+    .positon-submit {
+        font-family: "Gilroy";
+        font-style: normal;
+        font-weight: 700;
+        font-size: 24px;
+        line-height: 30px;
+        text-align: center;
+
+        color: #ffffff;
+        background: #7173fc;
+        border-radius: 7px;
+        border: 1px solid #7173fc;
+        width: 100%;
+        padding: 8px 0px 13px 0px;
+
+        &:hover {
+            background-color: #fff;
+            border-color: #7173fc;
+            color: #7173fc;
+            cursor: pointer;
+        }
+    }
+}
+
+.close-position-input {
+    input {
+        padding-left: 20px !important;
+    }
+}
+
+::placeholder {
+    /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: #e7ebfc;
+    opacity: 1; /* Firefox */
+}
+
+:-ms-input-placeholder {
+    /* Internet Explorer 10-11 */
+    color: #e7ebfc;
+}
+
+::-ms-input-placeholder {
+    /* Microsoft Edge */
+    color: #e7ebfc;
+}
+
+.partial-close-title {
+    font-family: "Gilroy";
+    font-style: normal;
+    font-weight: 600;
+    font-size: 20px;
+    margin-left: 6px;
+    color: #1f2040;
+    margin-bottom: 15px;
+}
+
+.radio-title {
+    display: flex;
+}
+.radio-dropdown {
+    display: flex;
+}
+.radio-dropdown-text {
+    margin-right: 15px;
+}
+
+.radio-dropdown {
+    .dropdown-container {
+        margin: 0 auto;
+        padding: 6px 0px;
+        background: #ffffff;
+        border: 1px solid #e8ecfd;
+        border-radius: 7px;
+        .dropdown-header {
+            padding: 0px 10px;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            font-family: "Gilroy";
+            font-style: normal;
+            font-weight: 600;
+            font-size: 16px;
+
+            color: #1f2040;
+
+            .dropdown-header-icon {
+                margin-right: 5px;
+                display: flex;
+            }
+
+            .dropdown-header-text {
+                margin-right: 5px;
+            }
+
+            .dropdown-header-control {
+                display: flex;
+                transition: 0.3s ease-in-out;
+            }
+        }
+        .dropdown-list-container {
+            position: relative;
+            transition: 0.3s ease-in-out;
+            .dropdown-list {
+                font-family: "Gilroy";
+                font-style: normal;
+                font-weight: 600;
+                font-size: 16px;
+                position: absolute;
+                color: #1f2040;
+                background: #ffffff;
+                border: 1px solid #e8ecfd;
+                border-top: transparent;
+                border-radius: 0px 0px 7px 7px;
+                display: flex;
+                flex-direction: column;
+                width: 100%;
+                left: -1px;
+                &:first-child {
+                    padding-top: 0.8em;
+                }
+                .dropdown-list-item {
+                    &:hover {
+                        background-color: #7173fc;
+                        color: #fff;
+                    }
+                    display: flex;
+                    flex-direction: row;
+                    align-items: center;
+                    padding: 5px 10px;
+                    list-style: none;
+                    margin-bottom: 0.8em;
+                    img {
+                        margin-right: 3px;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.isOpen {
+    transform: rotate(-180deg);
+}
+
+.checkmark.dropdown {
+    top: 8px;
+}

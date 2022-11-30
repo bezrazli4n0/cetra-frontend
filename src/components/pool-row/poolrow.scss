@@ -1,0 +1,273 @@
+.poolrow {
+    // display: flex;
+    // flex-direction: row;
+    // align-items: center;
+    // justify-content: space-between;
+    // padding: 30px 25px;
+
+    &:hover {
+        background-color: #e8ecfd;
+    }
+
+    position: relative;
+
+    &::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        width: 95%;
+
+        margin-left: auto;
+        margin-right: auto;
+        left: 0;
+        right: 0;
+        text-align: center;
+
+        // margin: 0px 25px;
+        height: 1px;
+        background-color: #e8ecfd;
+    }
+}
+
+.poolrow-title {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.poolrow-title-text {
+    margin-left: 25px;
+    .title-text {
+        font-family: "Gilroy";
+        font-style: normal;
+        font-weight: 700;
+        font-size: 16px;
+
+        color: #1f2040;
+        margin-bottom: 5px;
+        padding-bottom: 3px;
+
+        position: relative;
+        &::before {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50%;
+            height: 1px;
+            background-color: #e8ecfd;
+        }
+    }
+}
+
+.title-subtitles {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    span {
+        color: #e8ecfd;
+        margin: 0px 3px;
+    }
+    .title-subtitle {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        // margin-right: 10px;
+        .subtitle-icon {
+            display: flex;
+            margin-right: 3px;
+        }
+    }
+}
+
+.poolrow-title-icons {
+    display: flex;
+    position: relative;
+    .title-icon {
+        display: flex;
+        &:last-child {
+            position: absolute;
+            left: 16px;
+        }
+    }
+}
+
+.subtitle-text {
+    font-family: "Gilroy";
+    font-style: normal;
+    font-weight: 500;
+    font-size: 10px;
+
+    color: #1f2040;
+}
+
+.poolrow-apy {
+    font-family: "Gilroy";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+
+    color: #5555ff;
+}
+
+.poolrow-tvl {
+    // display: flex;
+    text-align: center;
+    flex-direction: column;
+    align-items: center;
+    .tvl-title {
+        font-family: "Gilroy";
+        font-style: normal;
+        font-weight: 700;
+        font-size: 16px;
+
+        margin-bottom: 6px;
+        padding-bottom: 3px;
+
+        color: #1f2040;
+        position: relative;
+        &::before {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            right: 50%;
+            width: 15%;
+            height: 1px;
+            background-color: #e8ecfd;
+        }
+    }
+
+    .tvl-subtitle {
+        font-family: "Gilroy";
+        font-style: normal;
+        font-weight: 500;
+        font-size: 10px;
+
+        color: #1f2040;
+    }
+}
+
+.poolrow-yild {
+    .yild-item {
+        display: flex;
+        justify-content: space-between;
+        flex-direction: row;
+        align-items: center;
+        margin-bottom: 7px;
+        &:last-child {
+            margin-bottom: 0px;
+        }
+        .item-title {
+            font-family: "Gilroy";
+            font-style: normal;
+            font-weight: 500;
+            font-size: 10px;
+            // margin-right: 50px;
+            color: #1f2040;
+            // width: 40%;
+        }
+        .item-info {
+            font-family: "Gilroy";
+            font-style: normal;
+            font-weight: 500;
+            font-size: 10px;
+
+            color: #1f2040;
+            // width: 60%;
+        }
+    }
+}
+
+.poolrow-strategy {
+    // display: flex;
+    flex-direction: column;
+    align-items: center;
+    .strategy-title {
+        font-family: "Gilroy";
+        font-style: normal;
+        font-weight: 600;
+        font-size: 14px;
+        margin-bottom: 4px;
+
+        color: #1f2040;
+
+        padding-bottom: 3px;
+
+        position: relative;
+        &::before {
+            content: "";
+            position: absolute;
+            margin-left: auto;
+            margin-right: auto;
+            left: 0;
+            right: 0;
+            text-align: center;
+            bottom: 0;
+            width: 20%;
+            height: 1px;
+            background-color: #e8ecfd;
+        }
+    }
+
+    .strategy-subtitle {
+        font-family: "Gilroy";
+        font-style: normal;
+        font-weight: 500;
+        font-size: 10px;
+
+        color: #1f2040;
+    }
+}
+
+.poolrow-control {
+    .control {
+        font-family: "Gilroy";
+        font-style: normal;
+        font-weight: 600;
+        font-size: 16px;
+        text-decoration: none;
+
+        color: #ffffff;
+        background-color: #7173fc;
+        border: 1px solid #7173fc;
+        padding: 7px 30px;
+        border-radius: 7px;
+        cursor: pointer;
+        &:hover {
+            background-color: #fff;
+            color: #7173fc;
+        }
+    }
+}
+
+table th {
+    padding-bottom: 10px;
+
+    &:first-child {
+        padding-left: 26px;
+    }
+    &.tvl {
+        width: 20%;
+    }
+    &.apr {
+        width: 10%;
+    }
+    &.strategy {
+        width: 20%;
+    }
+    &:last-child {
+        width: 20%;
+    }
+}
+
+table td {
+    text-align: center;
+}
+
+table tr > td {
+    padding-bottom: 30px;
+    padding-top: 30px;
+    &:first-child {
+        padding-left: 26px;
+    }
+}
