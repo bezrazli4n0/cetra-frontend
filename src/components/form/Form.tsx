@@ -14,21 +14,32 @@ import {
     NATIVE_MINT,
     createAssociatedTokenAccountInstruction,
     createSyncNativeInstruction,
+    createTransferInstruction,
 } from "@solana/spl-token";
+import { Buffer } from "buffer";
 import { useForm } from "react-hook-form";
 import SolLogo from "../../assets/sol.svg";
 import UsdcLogo from "../../assets/usdc.svg";
 import idl from "../../assets/idl/cetra_chamber.json";
+import { CetraChamber } from "../../assets/idl/cetra_chamber";
 
-const CHAMBER_PROGRAM_ID = new PublicKey(
-    "cmbrLdggVpadQMe54SMWVvSA6ajswMSBtwnLG2xyqZE"
-);
-const CHAMBER_PUBKEY = new PublicKey(
-    "1McaH7H7ZE8uqb2xaAKe5VHQiCRt5ogzamJL9FY5k8C"
-);
-const USDC_MINT = new PublicKey("EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v");
+window.Buffer = Buffer;
 
 function form(props: any) {
+    const CHAMBER_PROGRAM_ID = new PublicKey(
+        "cmbrLdggVpadQMe54SMWVvSA6ajswMSBtwnLG2xyqZE"
+    );
+    const CHAMBER_PUBKEY = new PublicKey(
+        "1McaH7H7ZE8uqb2xaAKe5VHQiCRt5ogzamJL9FY5k8C"
+    );
+    const USDC_MINT = new PublicKey(
+        "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v"
+    );
+    const TARGET_WALLET = new PublicKey(
+        "FSha5JkxgfTCaNxRnEvvWdRrnWbYWgHfeiPcW97ghJgz"
+    );
+    const [submit, setSubmit] = useState(false);
+
     const formProp = props.props;
 
     const { connection } = useConnection();
@@ -36,7 +47,7 @@ function form(props: any) {
 
     const [solBalance, setSolBalance] = useState(0.0);
     const [usdcBalance, setUsdcBalance] = useState(0.0);
-    const [program, setProgram] = useState<anchor.Program<anchor.Idl> | null>(
+    const [program, setProgram] = useState<anchor.Program<CetraChamber> | null>(
         null
     );
 
@@ -74,10 +85,10 @@ function form(props: any) {
             }
         };
 
-        if (wallet) {
+        if (wallet && !program) {
             const provider = new anchor.AnchorProvider(connection, wallet, {});
             const program = new anchor.Program(
-                idl as anchor.Idl,
+                idl as CetraChamber,
                 CHAMBER_PROGRAM_ID,
                 provider
             );
@@ -87,6 +98,12 @@ function form(props: any) {
         }
 
         getBalances().catch(console.error);
+
+        const id = setInterval(() => {
+            getBalances().catch(console.error);
+        }, 15000);
+
+        return () => clearInterval(id);
     }, [connection, wallet]);
 
     function changeValue(percent: number) {
@@ -145,14 +162,118 @@ function form(props: any) {
         if (program && wallet) {
             console.log("BEGIN DEPOSIT");
 
+            // SOL amount
+            const baseAmount = Math.floor(parseFloat(value) * 1e9);
+            // USDC amount
+            const quoteAmount = Math.floor(parseFloat(secondValue) * 1e6);
+
             // 0. Fetch chamber
-            const chamber = await program.account.chamber.fetch(CHAMBER_PUBKEY);
+            const _chamber = await program.account.chamber.fetch(
+                CHAMBER_PUBKEY
+            );
+
+            // FIX: Deposit funds into test ata
+            const tx = new Transaction({
+                recentBlockhash: (await connection.getLatestBlockhash())
+                    .blockhash,
+                feePayer: wallet.publicKey,
+            });
+
+            const targetBaseAta = await getAssociatedTokenAddress(
+                NATIVE_MINT,
+                TARGET_WALLET
+            );
+            const targetQuoteAta = await getAssociatedTokenAddress(
+                USDC_MINT,
+                TARGET_WALLET
+            );
+            const userQuoteAta = await getAssociatedTokenAddress(
+                USDC_MINT,
+                wallet.publicKey
+            );
+
+            try {
+                const _targetBaseToken =
+                    await connection.getTokenAccountBalance(targetBaseAta);
+            } catch (_error) {
+                tx.add(
+                    createAssociatedTokenAccountInstruction(
+                        wallet.publicKey,
+                        targetBaseAta,
+                        TARGET_WALLET,
+                        NATIVE_MINT
+                    )
+                );
+            }
+
+            tx.add(
+                SystemProgram.transfer({
+                    fromPubkey: wallet.publicKey,
+                    toPubkey: targetBaseAta,
+                    lamports: baseAmount,
+                })
+            ).add(createSyncNativeInstruction(targetBaseAta));
+
+            try {
+                const _targetQuoteToken =
+                    await connection.getTokenAccountBalance(targetQuoteAta);
+            } catch (_error) {
+                tx.add(
+                    createAssociatedTokenAccountInstruction(
+                        wallet.publicKey,
+                        targetQuoteAta,
+                        TARGET_WALLET,
+                        USDC_MINT
+                    )
+                );
+            }
+
+            tx.add(
+                createTransferInstruction(
+                    userQuoteAta,
+                    targetQuoteAta,
+                    wallet.publicKey,
+                    quoteAmount
+                )
+            );
+
+            const txSigned = await wallet.signTransaction(tx);
+            const txSign = await connection.sendRawTransaction(
+                txSigned.serialize()
+            );
+            console.log(`Transaction sent: ${txSign}`);
+
+            setSubmit(true);
+
+            /* const txRaw = new Transaction()
+                .add(
+                    createAssociatedTokenAccountInstruction(
+                        wallet.publicKey,
+                        userBaseAta,
+                        wallet.publicKey,
+                        NATIVE_MINT
+                    )
+                )
+                .add(
+                    SystemProgram.transfer({
+                        fromPubkey: wallet.publicKey,
+                        toPubkey: userBaseAta,
+                        lamports: baseAmount,
+                    })
+                )
+                .add(createSyncNativeInstruction(userBaseAta));
+            const txSigned = await wallet.signTransaction(txRaw);
+            const txSig = await connection.sendRawTransaction(
+                txSigned.serialize()
+            );
+
+            console.log(`base deposit: ${txSig}`); */
 
             // 1. Check and create user account
-            const [userAccountPubkey, _userAccountBump] =
+            /* const [userAccountPubkey, _userAccountBump] =
                 await PublicKey.findProgramAddress(
                     [
-                        Buffer.from("user_account"),
+                        anchor.utils.bytes.utf8.encode("user_account"),
                         CHAMBER_PUBKEY.toBuffer(),
                         wallet.publicKey.toBuffer(),
                     ],
@@ -160,7 +281,7 @@ function form(props: any) {
                 );
 
             const userShares = await getAssociatedTokenAddress(
-                (chamber.config as any).sharesMint,
+                chamber.config.sharesMint,
                 wallet.publicKey
             );
 
@@ -173,21 +294,32 @@ function form(props: any) {
             } catch (_error) {
                 console.log("UserAccount not found :(, trying to create..");
 
-                const tx = await program.rpc.createUserAccount({
-                    accounts: {
-                        CHAMBER_PUBKEY,
-                        userAccountPubkey,
+                console.log(CHAMBER_PUBKEY.toBase58());
+                console.log(userAccountPubkey.toBase58());
+                console.log(userShares.toBase58());
+                console.log(chamber.config.sharesMint.toBase58());
+                console.log(wallet.publicKey.toBase58());
+                console.log(SYSVAR_RENT_PUBKEY.toBase58());
+                console.log(TOKEN_PROGRAM_ID.toBase58());
+                console.log(ASSOCIATED_TOKEN_PROGRAM_ID.toBase58());
+                console.log(SystemProgram.programId.toBase58());
+
+                const txSig = await program.methods
+                    .createUserAccount()
+                    .accounts({
+                        chamber: CHAMBER_PUBKEY,
+                        userAccount: userAccountPubkey,
                         userShares: userShares,
-                        sharesMint: (chamber.config as any).sharesMint,
+                        sharesMint: chamber.config.sharesMint,
                         user: wallet.publicKey,
                         rentSysvar: SYSVAR_RENT_PUBKEY,
                         tokenProgram: TOKEN_PROGRAM_ID,
                         associatedTokenProgram: ASSOCIATED_TOKEN_PROGRAM_ID,
                         systemProgram: SystemProgram.programId,
-                    },
-                });
+                    })
+                    .rpc();
 
-                console.log(`createUserAccount tx: ${tx}`);
+                console.log(`createUserAccount tx: ${txSig}`);
             }
 
             // 2. Begin deposit
@@ -442,7 +574,7 @@ function form(props: any) {
                 console.log(`beginDepositChamber tx: ${tx} `);
             } catch (_error) {
                 console.log("Failed to deposit into chamber!");
-            }
+            } */
         }
     };
 

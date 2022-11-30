@@ -14,7 +14,7 @@ import { WalletModalProvider } from "@solana/wallet-adapter-react-ui";
 import "./App.scss";
 
 function App() {
-    const endpoint = "https://rpc.ankr.com/solana";
+    const endpoint = "https://api.metaplex.solana.com/";
 
     const wallets = useMemo(
         () => [

@@ -1,0 +1,1941 @@
+export type CetraChamber = {
+  "version": "0.1.0",
+  "name": "cetra_chamber",
+  "instructions": [
+    {
+      "name": "initializeChamber",
+      "accounts": [
+        {
+          "name": "chamber",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "farm",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "baseToken",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "quoteToken",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "baseMint",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "quoteMint",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "sharesMint",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "baseOracle",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "quoteOracle",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "authority",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "feeManager",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "farmLp",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "farmLpMint",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "farmProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "payer",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "owner",
+          "isMut": false,
+          "isSigner": true
+        },
+        {
+          "name": "clockSysvar",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "rentSysvar",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "tokenProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "associatedTokenProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "market",
+          "type": {
+            "defined": "crate::state::ChamberMarket"
+          }
+        },
+        {
+          "name": "leverage",
+          "type": "u64"
+        },
+        {
+          "name": "isBaseVolatile",
+          "type": "bool"
+        },
+        {
+          "name": "chamberNonce",
+          "type": "u8"
+        },
+        {
+          "name": "authorityBump",
+          "type": "u8"
+        }
+      ]
+    },
+    {
+      "name": "createUserAccount",
+      "accounts": [
+        {
+          "name": "chamber",
+          "isMut": false,
+          "isSigner": false,
+          "docs": [
+            "Chamber will be associated with `UserAccount`."
+          ]
+        },
+        {
+          "name": "userAccount",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "userShares",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "sharesMint",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "user",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "rentSysvar",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "tokenProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "associatedTokenProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "beginDepositChamber",
+      "accounts": [
+        {
+          "name": "chamber",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "userAccount",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "userShares",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "userBaseToken",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "userQuoteToken",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "chamberSharesMint",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "chamberBaseToken",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "chamberQuoteToken",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "chamberBaseOracle",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "chamberQuoteOracle",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "chamberAuthority",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "chamberFarmProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "user",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "rentSysvar",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "tokenProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "baseAmount",
+          "type": "u64"
+        },
+        {
+          "name": "quoteAmount",
+          "type": "u64"
+        }
+      ]
+    },
+    {
+      "name": "processDepositChamber",
+      "accounts": [
+        {
+          "name": "chamber",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "userAccount",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "chamberAuthority",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "chamberFarmProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "user",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "clockSysvar",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "rentSysvar",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "tokenProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "endDepositChamber",
+      "accounts": [
+        {
+          "name": "chamber",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "userAccount",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "chamberSharesMint",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "chamberAuthority",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "chamberFarmProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "userShares",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "user",
+          "isMut": false,
+          "isSigner": true
+        },
+        {
+          "name": "clockSysvar",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "rentSysvar",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "tokenProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "depositChamber",
+      "accounts": [
+        {
+          "name": "chamber",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "userAccount",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "userShares",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "userBaseToken",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "userQuoteToken",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "chamberSharesMint",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "chamberBaseToken",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "chamberQuoteToken",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "chamberBaseOracle",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "chamberQuoteOracle",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "chamberAuthority",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "chamberFarmProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "user",
+          "isMut": false,
+          "isSigner": true
+        },
+        {
+          "name": "clockSysvar",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "rentSysvar",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "tokenProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "baseAmount",
+          "type": "u64"
+        },
+        {
+          "name": "quoteAmount",
+          "type": "u64"
+        }
+      ]
+    },
+    {
+      "name": "withdrawChamber",
+      "accounts": [
+        {
+          "name": "chamber",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "userAccount",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "userShares",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "userBaseToken",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "userQuoteToken",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "chamberSharesMint",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "chamberBaseToken",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "chamberQuoteToken",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "chamberBaseOracle",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "chamberQuoteOracle",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "chamberAuthority",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "chamberFarmProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "user",
+          "isMut": false,
+          "isSigner": true
+        },
+        {
+          "name": "clockSysvar",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "rentSysvar",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "tokenProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "baseAmount",
+          "type": "u64"
+        },
+        {
+          "name": "quoteAmount",
+          "type": "u64"
+        }
+      ]
+    },
+    {
+      "name": "rebalanceChamber",
+      "accounts": [
+        {
+          "name": "chamber",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "chamberBaseToken",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "chamberQuoteToken",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "chamberBaseOracle",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "chamberQuoteOracle",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "chamberAuthority",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "chamberFarmProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "user",
+          "isMut": false,
+          "isSigner": true
+        },
+        {
+          "name": "clockSysvar",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "rentSysvar",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "tokenProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": []
+    }
+  ],
+  "accounts": [
+    {
+      "name": "chamber",
+      "docs": [
+        "Protocol vault, which represents pool position."
+      ],
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "strategy",
+            "docs": [
+              "Internal strategy details and config."
+            ],
+            "type": {
+              "defined": "ChamberStrategy"
+            }
+          },
+          {
+            "name": "vault",
+            "docs": [
+              "Stores `Chamber` tokens config and related data."
+            ],
+            "type": {
+              "defined": "ChamberVault"
+            }
+          },
+          {
+            "name": "config",
+            "docs": [
+              "`Chamber` config."
+            ],
+            "type": {
+              "defined": "ChamberConfig"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "userAccount",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "chamber",
+            "type": "publicKey"
+          },
+          {
+            "name": "user",
+            "type": "publicKey"
+          },
+          {
+            "name": "shares",
+            "type": "publicKey"
+          },
+          {
+            "name": "status",
+            "type": {
+              "defined": "UserAccountStatus"
+            }
+          },
+          {
+            "name": "fee",
+            "type": {
+              "option": {
+                "defined": "UserFee"
+              }
+            }
+          },
+          {
+            "name": "lockedBaseAmount",
+            "type": "u64"
+          },
+          {
+            "name": "lockedQuoteAmount",
+            "type": "u64"
+          },
+          {
+            "name": "lockedSharesAmount",
+            "type": "u64"
+          }
+        ]
+      }
+    },
+    {
+      "name": "userFee",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "lastSharesPrice",
+            "type": "u128"
+          },
+          {
+            "name": "lastTimestamp",
+            "type": {
+              "defined": "UnixTimestamp"
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "types": [
+    {
+      "name": "ChamberConfig",
+      "docs": [
+        "Provide internal configuration for `state::Chamber`."
+      ],
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "authority",
+            "type": "publicKey"
+          },
+          {
+            "name": "owner",
+            "type": "publicKey"
+          },
+          {
+            "name": "feeManager",
+            "type": "publicKey"
+          },
+          {
+            "name": "sharesMint",
+            "type": "publicKey"
+          },
+          {
+            "name": "authorityBump",
+            "type": "u8"
+          },
+          {
+            "name": "nonce",
+            "docs": [
+              "Chamber nonce(index)."
+            ],
+            "type": "u8"
+          }
+        ]
+      }
+    },
+    {
+      "name": "ChamberStrategy",
+      "docs": [
+        "Provide internal strategy configuration for `state::Chamber`."
+      ],
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "market",
+            "type": {
+              "defined": "ChamberMarket"
+            }
+          },
+          {
+            "name": "farm",
+            "type": "publicKey"
+          },
+          {
+            "name": "farmProgram",
+            "type": "publicKey"
+          },
+          {
+            "name": "farmLp",
+            "type": "publicKey"
+          },
+          {
+            "name": "leverage",
+            "docs": [
+              "Provide underlying LYF leverage config."
+            ],
+            "type": "u64"
+          },
+          {
+            "name": "isBaseVolatile",
+            "docs": [
+              "Indicates, that `ChamberVault::base` is volatile token.",
+              "Primarly used in PDN(Pseudo-Delta Neutral) position calculation."
+            ],
+            "type": "bool"
+          }
+        ]
+      }
+    },
+    {
+      "name": "ChamberVault",
+      "docs": [
+        "Provide token-related data for `state::Chamber`."
+      ],
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "base",
+            "docs": [
+              "Base ata(associated spl token account).",
+              "",
+              "Important! - chosen based on underlying strategy."
+            ],
+            "type": "publicKey"
+          },
+          {
+            "name": "quote",
+            "docs": [
+              "Quote ata(associated spl token account).",
+              "",
+              "Important! - chosen based on underlying strategy."
+            ],
+            "type": "publicKey"
+          },
+          {
+            "name": "baseMint",
+            "type": "publicKey"
+          },
+          {
+            "name": "quoteMint",
+            "type": "publicKey"
+          },
+          {
+            "name": "baseOracle",
+            "type": "publicKey"
+          },
+          {
+            "name": "quoteOracle",
+            "type": "publicKey"
+          },
+          {
+            "name": "baseDecimals",
+            "type": "u64"
+          },
+          {
+            "name": "quoteDecimals",
+            "type": "u64"
+          },
+          {
+            "name": "baseAmount",
+            "type": "u128"
+          },
+          {
+            "name": "quoteAmount",
+            "type": "u128"
+          }
+        ]
+      }
+    },
+    {
+      "name": "ChamberMarket",
+      "docs": [
+        "Represent `state::Chamber` position market.",
+        "Indicates all supported(integrated) protocols."
+      ],
+      "type": {
+        "kind": "enum",
+        "variants": [
+          {
+            "name": "Tulip"
+          }
+        ]
+      }
+    },
+    {
+      "name": "UserAccountStatus",
+      "type": {
+        "kind": "enum",
+        "variants": [
+          {
+            "name": "Ready"
+          },
+          {
+            "name": "BeginDeposit"
+          },
+          {
+            "name": "ProcessDeposit"
+          }
+        ]
+      }
+    }
+  ],
+  "errors": [
+    {
+      "code": 6000,
+      "name": "CpiInstructionFormationFailed",
+      "msg": "CPI instruction formation is failed"
+    },
+    {
+      "code": 6001,
+      "name": "InvalidUserAccountStatus",
+      "msg": "Invalid user account status"
+    },
+    {
+      "code": 6002,
+      "name": "InsufficientFunds",
+      "msg": "Insufficient funds"
+    },
+    {
+      "code": 6003,
+      "name": "MathOverflow",
+      "msg": "Math overflow"
+    }
+  ]
+};
+
+export const IDL: CetraChamber = {
+  "version": "0.1.0",
+  "name": "cetra_chamber",
+  "instructions": [
+    {
+      "name": "initializeChamber",
+      "accounts": [
+        {
+          "name": "chamber",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "farm",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "baseToken",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "quoteToken",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "baseMint",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "quoteMint",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "sharesMint",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "baseOracle",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "quoteOracle",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "authority",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "feeManager",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "farmLp",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "farmLpMint",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "farmProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "payer",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "owner",
+          "isMut": false,
+          "isSigner": true
+        },
+        {
+          "name": "clockSysvar",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "rentSysvar",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "tokenProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "associatedTokenProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "market",
+          "type": {
+            "defined": "crate::state::ChamberMarket"
+          }
+        },
+        {
+          "name": "leverage",
+          "type": "u64"
+        },
+        {
+          "name": "isBaseVolatile",
+          "type": "bool"
+        },
+        {
+          "name": "chamberNonce",
+          "type": "u8"
+        },
+        {
+          "name": "authorityBump",
+          "type": "u8"
+        }
+      ]
+    },
+    {
+      "name": "createUserAccount",
+      "accounts": [
+        {
+          "name": "chamber",
+          "isMut": false,
+          "isSigner": false,
+          "docs": [
+            "Chamber will be associated with `UserAccount`."
+          ]
+        },
+        {
+          "name": "userAccount",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "userShares",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "sharesMint",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "user",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "rentSysvar",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "tokenProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "associatedTokenProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "beginDepositChamber",
+      "accounts": [
+        {
+          "name": "chamber",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "userAccount",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "userShares",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "userBaseToken",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "userQuoteToken",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "chamberSharesMint",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "chamberBaseToken",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "chamberQuoteToken",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "chamberBaseOracle",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "chamberQuoteOracle",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "chamberAuthority",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "chamberFarmProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "user",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "rentSysvar",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "tokenProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "baseAmount",
+          "type": "u64"
+        },
+        {
+          "name": "quoteAmount",
+          "type": "u64"
+        }
+      ]
+    },
+    {
+      "name": "processDepositChamber",
+      "accounts": [
+        {
+          "name": "chamber",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "userAccount",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "chamberAuthority",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "chamberFarmProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "user",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "clockSysvar",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "rentSysvar",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "tokenProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "endDepositChamber",
+      "accounts": [
+        {
+          "name": "chamber",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "userAccount",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "chamberSharesMint",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "chamberAuthority",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "chamberFarmProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "userShares",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "user",
+          "isMut": false,
+          "isSigner": true
+        },
+        {
+          "name": "clockSysvar",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "rentSysvar",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "tokenProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "depositChamber",
+      "accounts": [
+        {
+          "name": "chamber",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "userAccount",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "userShares",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "userBaseToken",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "userQuoteToken",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "chamberSharesMint",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "chamberBaseToken",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "chamberQuoteToken",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "chamberBaseOracle",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "chamberQuoteOracle",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "chamberAuthority",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "chamberFarmProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "user",
+          "isMut": false,
+          "isSigner": true
+        },
+        {
+          "name": "clockSysvar",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "rentSysvar",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "tokenProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "baseAmount",
+          "type": "u64"
+        },
+        {
+          "name": "quoteAmount",
+          "type": "u64"
+        }
+      ]
+    },
+    {
+      "name": "withdrawChamber",
+      "accounts": [
+        {
+          "name": "chamber",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "userAccount",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "userShares",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "userBaseToken",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "userQuoteToken",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "chamberSharesMint",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "chamberBaseToken",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "chamberQuoteToken",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "chamberBaseOracle",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "chamberQuoteOracle",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "chamberAuthority",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "chamberFarmProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "user",
+          "isMut": false,
+          "isSigner": true
+        },
+        {
+          "name": "clockSysvar",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "rentSysvar",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "tokenProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "baseAmount",
+          "type": "u64"
+        },
+        {
+          "name": "quoteAmount",
+          "type": "u64"
+        }
+      ]
+    },
+    {
+      "name": "rebalanceChamber",
+      "accounts": [
+        {
+          "name": "chamber",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "chamberBaseToken",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "chamberQuoteToken",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "chamberBaseOracle",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "chamberQuoteOracle",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "chamberAuthority",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "chamberFarmProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "user",
+          "isMut": false,
+          "isSigner": true
+        },
+        {
+          "name": "clockSysvar",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "rentSysvar",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "tokenProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": []
+    }
+  ],
+  "accounts": [
+    {
+      "name": "chamber",
+      "docs": [
+        "Protocol vault, which represents pool position."
+      ],
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "strategy",
+            "docs": [
+              "Internal strategy details and config."
+            ],
+            "type": {
+              "defined": "ChamberStrategy"
+            }
+          },
+          {
+            "name": "vault",
+            "docs": [
+              "Stores `Chamber` tokens config and related data."
+            ],
+            "type": {
+              "defined": "ChamberVault"
+            }
+          },
+          {
+            "name": "config",
+            "docs": [
+              "`Chamber` config."
+            ],
+            "type": {
+              "defined": "ChamberConfig"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "userAccount",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "chamber",
+            "type": "publicKey"
+          },
+          {
+            "name": "user",
+            "type": "publicKey"
+          },
+          {
+            "name": "shares",
+            "type": "publicKey"
+          },
+          {
+            "name": "status",
+            "type": {
+              "defined": "UserAccountStatus"
+            }
+          },
+          {
+            "name": "fee",
+            "type": {
+              "option": {
+                "defined": "UserFee"
+              }
+            }
+          },
+          {
+            "name": "lockedBaseAmount",
+            "type": "u64"
+          },
+          {
+            "name": "lockedQuoteAmount",
+            "type": "u64"
+          },
+          {
+            "name": "lockedSharesAmount",
+            "type": "u64"
+          }
+        ]
+      }
+    },
+    {
+      "name": "userFee",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "lastSharesPrice",
+            "type": "u128"
+          },
+          {
+            "name": "lastTimestamp",
+            "type": {
+              "defined": "UnixTimestamp"
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "types": [
+    {
+      "name": "ChamberConfig",
+      "docs": [
+        "Provide internal configuration for `state::Chamber`."
+      ],
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "authority",
+            "type": "publicKey"
+          },
+          {
+            "name": "owner",
+            "type": "publicKey"
+          },
+          {
+            "name": "feeManager",
+            "type": "publicKey"
+          },
+          {
+            "name": "sharesMint",
+            "type": "publicKey"
+          },
+          {
+            "name": "authorityBump",
+            "type": "u8"
+          },
+          {
+            "name": "nonce",
+            "docs": [
+              "Chamber nonce(index)."
+            ],
+            "type": "u8"
+          }
+        ]
+      }
+    },
+    {
+      "name": "ChamberStrategy",
+      "docs": [
+        "Provide internal strategy configuration for `state::Chamber`."
+      ],
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "market",
+            "type": {
+              "defined": "ChamberMarket"
+            }
+          },
+          {
+            "name": "farm",
+            "type": "publicKey"
+          },
+          {
+            "name": "farmProgram",
+            "type": "publicKey"
+          },
+          {
+            "name": "farmLp",
+            "type": "publicKey"
+          },
+          {
+            "name": "leverage",
+            "docs": [
+              "Provide underlying LYF leverage config."
+            ],
+            "type": "u64"
+          },
+          {
+            "name": "isBaseVolatile",
+            "docs": [
+              "Indicates, that `ChamberVault::base` is volatile token.",
+              "Primarly used in PDN(Pseudo-Delta Neutral) position calculation."
+            ],
+            "type": "bool"
+          }
+        ]
+      }
+    },
+    {
+      "name": "ChamberVault",
+      "docs": [
+        "Provide token-related data for `state::Chamber`."
+      ],
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "base",
+            "docs": [
+              "Base ata(associated spl token account).",
+              "",
+              "Important! - chosen based on underlying strategy."
+            ],
+            "type": "publicKey"
+          },
+          {
+            "name": "quote",
+            "docs": [
+              "Quote ata(associated spl token account).",
+              "",
+              "Important! - chosen based on underlying strategy."
+            ],
+            "type": "publicKey"
+          },
+          {
+            "name": "baseMint",
+            "type": "publicKey"
+          },
+          {
+            "name": "quoteMint",
+            "type": "publicKey"
+          },
+          {
+            "name": "baseOracle",
+            "type": "publicKey"
+          },
+          {
+            "name": "quoteOracle",
+            "type": "publicKey"
+          },
+          {
+            "name": "baseDecimals",
+            "type": "u64"
+          },
+          {
+            "name": "quoteDecimals",
+            "type": "u64"
+          },
+          {
+            "name": "baseAmount",
+            "type": "u128"
+          },
+          {
+            "name": "quoteAmount",
+            "type": "u128"
+          }
+        ]
+      }
+    },
+    {
+      "name": "ChamberMarket",
+      "docs": [
+        "Represent `state::Chamber` position market.",
+        "Indicates all supported(integrated) protocols."
+      ],
+      "type": {
+        "kind": "enum",
+        "variants": [
+          {
+            "name": "Tulip"
+          }
+        ]
+      }
+    },
+    {
+      "name": "UserAccountStatus",
+      "type": {
+        "kind": "enum",
+        "variants": [
+          {
+            "name": "Ready"
+          },
+          {
+            "name": "BeginDeposit"
+          },
+          {
+            "name": "ProcessDeposit"
+          }
+        ]
+      }
+    }
+  ],
+  "errors": [
+    {
+      "code": 6000,
+      "name": "CpiInstructionFormationFailed",
+      "msg": "CPI instruction formation is failed"
+    },
+    {
+      "code": 6001,
+      "name": "InvalidUserAccountStatus",
+      "msg": "Invalid user account status"
+    },
+    {
+      "code": 6002,
+      "name": "InsufficientFunds",
+      "msg": "Insufficient funds"
+    },
+    {
+      "code": 6003,
+      "name": "MathOverflow",
+      "msg": "Math overflow"
+    }
+  ]
+};
