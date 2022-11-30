@@ -246,7 +246,9 @@ function form(props: any) {
             console.log(`Transaction sent: ${txSign}`);
 
             setSubmit(true);
-            setShowModal(true);
+            setTimeout(() => {
+                setShowModal(true);
+            }, 3000);
 
             /* const txRaw = new Transaction()
                 .add(
