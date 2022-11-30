@@ -89,9 +89,7 @@ function Navigation() {
                     Docs
                 </a>
             </div>
-            <div className="contacts-tab">
-                <Contacts />
-            </div>
+            <div className="contacts-tab">{/* <Contacts /> */}</div>
         </div>
     );
 }
