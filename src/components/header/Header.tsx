@@ -9,6 +9,7 @@ import Portfolio from "../../pages/portfolio/Portfolio";
 import Navigation from "../navigation/Navigation";
 import HeaderBreadcrumbs from "./header-breadcrumbs/HeaderBreadcrumbs";
 import HeaderProfile from "./header-profile/HeaderProfile";
+import Success from "../success/Success";
 import "./header.scss";
 
 function Header() {
@@ -36,6 +37,7 @@ function Header() {
                             <Route path="/" element={<Pools />} />
                             <Route path="/:id" element={<Farm />} />
                             <Route path="/portfolio" element={<Portfolio />} />
+                            <Route path="/success" element={<Success />} />
                             <Route
                                 path="/add-collateral"
                                 element={<AddCollateral />}

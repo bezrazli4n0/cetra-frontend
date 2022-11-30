@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useConnection, useAnchorWallet } from "@solana/wallet-adapter-react";
 import * as anchor from "@project-serum/anchor";
+import Modal from "../modal/Modal";
 import {
     SystemProgram,
     Transaction,
@@ -63,6 +64,7 @@ function form(props: any) {
 
     const [secondValue, setSecondValue] = useState<string>("");
     const [value, setValue] = useState<string>("");
+    const [showModal, setShowModal] = useState(false);
 
     useEffect(() => {
         const getBalances = async () => {
@@ -244,6 +246,7 @@ function form(props: any) {
             console.log(`Transaction sent: ${txSign}`);
 
             setSubmit(true);
+            setShowModal(true);
 
             /* const txRaw = new Transaction()
                 .add(
@@ -679,6 +682,7 @@ function form(props: any) {
                     {formProp ? "Add Collateral" : "Farm"}
                 </button>
             </div>
+            {showModal ? <Modal props={""} /> : null}
         </form>
     );
 }

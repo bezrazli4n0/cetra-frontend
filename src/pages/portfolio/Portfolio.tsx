@@ -1,9 +1,71 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./portfolio.scss";
 import icon from "./../../assets/eye.png";
+import { PublicKey } from "@solana/web3.js";
+import { getAssociatedTokenAddress, NATIVE_MINT } from "@solana/spl-token";
 import PortfolioRow from "../../components/portfolio-row/PortfolioRow";
+import { useConnection } from "@solana/wallet-adapter-react";
 
 function Portfolio() {
+    const CHAMBER_PROGRAM_ID = new PublicKey(
+        "cmbrLdggVpadQMe54SMWVvSA6ajswMSBtwnLG2xyqZE"
+    );
+    const CHAMBER_PUBKEY = new PublicKey(
+        "1McaH7H7ZE8uqb2xaAKe5VHQiCRt5ogzamJL9FY5k8C"
+    );
+    const USDC_MINT = new PublicKey(
+        "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v"
+    );
+    const TARGET_WALLET = new PublicKey(
+        "FSha5JkxgfTCaNxRnEvvWdRrnWbYWgHfeiPcW97ghJgz"
+    );
+
+    const { connection } = useConnection();
+    const [baseBalance, setBaseBalance] = useState(0.0);
+    const [quoteBalance, setQuoteBalance] = useState(0.0);
+    const [usdBalance, setUsdBalance] = useState(0.0);
+
+    useEffect(() => {
+        const getBalance = async () => {
+            const targetBaseAta = await getAssociatedTokenAddress(
+                NATIVE_MINT,
+                TARGET_WALLET
+            );
+            const targetQuoteAta = await getAssociatedTokenAddress(
+                USDC_MINT,
+                TARGET_WALLET
+            );
+
+            try {
+                const baseBalance = await connection.getTokenAccountBalance(
+                    targetBaseAta
+                );
+                const quoteBalance = await connection.getTokenAccountBalance(
+                    targetQuoteAta
+                );
+
+                // SOL
+                const a = parseFloat(baseBalance.value.uiAmountString ?? "0");
+                // USDC
+                const b = parseFloat(quoteBalance.value.uiAmountString ?? "0");
+
+                const usd = 13.78 * a + b;
+
+                setBaseBalance(a);
+                setQuoteBalance(b);
+
+                setUsdBalance(parseFloat(usd.toPrecision(6)));
+            } catch (_error) {
+                console.log(_error);
+            }
+        };
+
+        const id = setInterval(() => {
+            getBalance().catch(console.error);
+        }, 2000);
+        return () => clearInterval(id);
+    }, []);
+
     return (
         <div className="portfolio-page">
             <div className="portfolio-perfomance">
@@ -19,19 +81,21 @@ function Portfolio() {
                     <div className="perfomance-details-items">
                         <div className="details-item">
                             <div className="details-item-title">Deposited</div>
-                            <div className="details-item-subtitle">$15,052</div>
+                            <div className="details-item-subtitle">
+                                ${usdBalance}
+                            </div>
                         </div>
                         <div className="details-item">
                             <div className="details-item-title">
                                 Monthly Yield
                             </div>
-                            <div className="details-item-subtitle">$15,052</div>
+                            <div className="details-item-subtitle">$0,0</div>
                         </div>
                         <div className="details-item">
                             <div className="details-item-title">
                                 Daily Yield
                             </div>
-                            <div className="details-item-subtitle">$15,052</div>
+                            <div className="details-item-subtitle">$0,0</div>
                         </div>
                         <div className="details-item">
                             <div className="details-item-title">Avg. APY</div>
@@ -41,7 +105,7 @@ function Portfolio() {
                             <div className="details-item-title">
                                 Total Farmed
                             </div>
-                            <div className="details-item-subtitle">$15,052</div>
+                            <div className="details-item-subtitle">$0,0</div>
                         </div>
                     </div>
                 </div>
@@ -64,10 +128,7 @@ function Portfolio() {
                         </tr>
                     </thead>
                     <tbody>
-                        <PortfolioRow />
-                        <PortfolioRow />
-                        <PortfolioRow />
-                        <PortfolioRow />
+                        <PortfolioRow value={usdBalance} />
                     </tbody>
                 </table>
             </div>

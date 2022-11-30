@@ -1,34 +1,34 @@
 import React from "react";
 import "./portfoliorow.scss";
-import logo1 from "./../../assets/R.svg";
-import logo from "./../../assets/usdc.svg";
+import RaydiumLogo from "./../../assets/R.svg";
+import UsdcLogo from "./../../assets/usdc.svg";
 import { Link } from "react-router-dom";
 import tulpan from "./../../assets/tulpan.svg";
-import sol from "./../../assets/stSOL.svg";
+import SolLogo from "./../../assets/sol.svg";
 // import settings from "./../../assets/settings.svg";
 // import share from "./../../assets/share.svg";
 
-function PortfolioRow() {
+function PortfolioRow(props: any) {
     return (
         <tr className="poolrow">
             <td className="poolrow-title portfolio-row-title">
                 <div className="poolrow-title-icons">
                     <div className="title-icon">
-                        <img width={27} height={27} src={sol} alt="" />
+                        <img width={27} height={27} src={SolLogo} alt="" />
                     </div>
                     <div className="title-icon">
-                        <img width={27} height={27} src={logo} alt="" />
+                        <img width={27} height={27} src={UsdcLogo} alt="" />
                     </div>
                 </div>
                 <div className="poolrow-title-text">
-                    <div className="title-text">SOL-UCDC</div>
+                    <div className="title-text">SOL-USDC</div>
                     <div className="title-subtitles">
                         <div className="title-subtitle">
                             <div className="subtitle-icon">
                                 <img
                                     width={11}
                                     height={11}
-                                    src={logo1}
+                                    src={RaydiumLogo}
                                     alt=""
                                 />
                             </div>
@@ -51,12 +51,12 @@ function PortfolioRow() {
             </td>
             <td className="poolrow-apy portfolio-apy">36.22%</td>
             <td className="poolrow-tvl">
-                <div className="tvl-title position">$8.05M</div>
+                <div className="tvl-title position">${props.value}</div>
             </td>
             <td className="poolrow-yild">
-                <div className="row-farmed-title">$145.21</div>
+                <div className="row-farmed-title">$0.0</div>
                 <div className="row-farmed-subtitle">
-                    <span>12$</span> Since Yesterday
+                    <span>0$</span> Since Yesterday
                 </div>
             </td>
             <td className="poolrow-strategy">
